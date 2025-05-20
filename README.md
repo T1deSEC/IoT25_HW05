@@ -2,9 +2,9 @@
 
 ## Demo Images
 
-![Photo 1](HW05_01.jpg)  
+![Photo 1](HW05_01.png)  
 
-![Photo 2](HW05_02.jpg)  
+![Photo 2](HW05_02.png)  
 
 ## Demo Video
 
