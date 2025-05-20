@@ -10,7 +10,6 @@
 // BLE server name
 #define bleServerName "IoT_E"
 
-// DHT11 설정
 #define DHTPIN 4
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
@@ -39,7 +38,6 @@ bool deviceConnected = false;
 BLECharacteristic bmeHumidityCharacteristics("ca73b3ba-39f6-4ab3-91ae-186dc9577d99", BLECharacteristic::PROPERTY_NOTIFY);
 BLEDescriptor bmeHumidityDescriptor(BLEUUID((uint16_t)0x2903));
 
-// BLE 서버 콜백
 class MyServerCallbacks: public BLEServerCallbacks {
   void onConnect(BLEServer* pServer) {
     deviceConnected = true;
@@ -52,10 +50,8 @@ class MyServerCallbacks: public BLEServerCallbacks {
 void setup() {
   Serial.begin(115200);
 
-  // DHT11 센서 시작
   dht.begin();
 
-  // BLE 초기화
   BLEDevice::init(bleServerName);
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
@@ -89,7 +85,6 @@ void setup() {
 void loop() {
   if (deviceConnected) {
     if ((millis() - lastTime) > timerDelay) {
-      // 센서 값 읽기
       temp = dht.readTemperature();   // Celsius
       tempF = 1.8 * temp + 32;        // Fahrenheit
       hum = dht.readHumidity();
